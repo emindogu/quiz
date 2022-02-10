@@ -91,6 +91,16 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @if(auth()->user()->type=='admin')
+                              <div class="block px-4 py-2 text-xs text-gray-400">
+                                Admin İşlemleri
+                            </div>
+
+                            <x-jet-dropdown-link href="{{ route('quizzes.index') }}">
+                                Quizler
+                            </x-jet-dropdown-link>
+                            @endif
+
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
@@ -115,7 +125,7 @@
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    Güvenli Çıkış
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
