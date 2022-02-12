@@ -5,6 +5,6 @@
 
     <div class="alert alert-success">
         Emin DOĞU
-    </div>
+    </div> 
     
 </x-app-layout>
