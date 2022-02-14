@@ -45,7 +45,7 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        return $id;
     }
 
     /**
@@ -69,7 +69,7 @@ class QuizController extends Controller {
     public function update(QuizUpdateRequest $request, $id) {
         $quiz=Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı');
         Quiz::where('id', $id)->update($request->except(['_method','_token']));
-        return redirect()->route('quizzes.index')->withSuccess('Quiz Güncelleme İşlemi Başarıyla Tamalandı!');
+        return redirect()->route('quizzes.index')->withSuccess('Quiz Güncelleme İşlemi Başarıyla Tamamlandı!');
     }
 
     /**
@@ -79,6 +79,8 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        $quiz = Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı');
+        $quiz->delete();
+        return redirect()->route('quizzes.index')->withSuccess('Quiz Başarıyla Silindi!');
     }
 }
