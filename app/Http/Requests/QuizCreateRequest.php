@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests;
+<?php
+
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -9,7 +11,8 @@ class QuizCreateRequest extends FormRequest {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -18,7 +21,9 @@ class QuizCreateRequest extends FormRequest {
      *
      * @return array
      */
-    public function rules() {
+
+    public function rules()
+    {
         return [
         'title'=>'required|min:3|max:200',
         'description'=>'max:1000',
