@@ -18,4 +18,5 @@ function () {
     Route::get('quizzes/{id}', [QuizController::class,'destroy'])->whereNumber('$id')->name('quizzes.destroy');
     Route::resource('quizzes', QuizController::class);
     Route::resource('quiz/{quiz_id}/questions', QuestionController::class);
+    //Route::resource('quiz/{quiz_id}/questions/{question}/edit', QuestionController::class);
 });
