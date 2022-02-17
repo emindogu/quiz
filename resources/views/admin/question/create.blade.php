@@ -5,7 +5,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{{route('questions.store',$quiz->id)}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('questions.store', $quiz->id)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="">Soru</label>

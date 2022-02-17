@@ -14,7 +14,7 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $quizzes=Quiz::Paginate(5);
+        $quizzes=Quiz::withCount('questions')->Paginate(5);
         return view('admin.quiz.list', compact('quizzes'));
     }
 
@@ -55,7 +55,7 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $quiz=Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı!!!');
+        $quiz=Quiz::withCount('questions')->find($id) ?? abort(404, 'Quiz Bulunamadı');
         return view('admin.quiz.edit', compact('quiz'));
     }
 
@@ -67,7 +67,7 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(QuizUpdateRequest $request, $id) {
-        $quiz=Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı,,,');
+        $quiz=Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı');
         Quiz::where('id', $id)->update($request->except(['_method','_token']));
         return redirect()->route('quizzes.index')->withSuccess('Quiz Güncelleme İşlemi Başarıyla Tamamlandı!');
     }
@@ -79,7 +79,7 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $quiz = Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı...');
+        $quiz = Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı');
         $quiz->delete();
         return redirect()->route('quizzes.index')->withSuccess('Quiz Başarıyla Silindi!');
     }

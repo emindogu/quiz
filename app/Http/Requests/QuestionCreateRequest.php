@@ -24,7 +24,7 @@ class QuestionCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'question'=>'required|min:3',
+            'question' => 'required|min:3',
             'image' => 'image|nullable|max:1024|mimes:jpg,jpeg,png',
             'answer1' => 'required|min:1',
             'answer2' => 'required|min:1',
