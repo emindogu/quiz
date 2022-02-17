@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="" class="mt-4">Quiz Durumu</label>
                     <select name="status" class="form-control">
-                        <option @if($quiz->questions_count<4) disabled @endif @if($quiz->status==='publish') selected @endif value="publish">Aktif</option>
+                        <option @if($quiz->questions_count<5) disabled @endif @if($quiz->status==='publish') selected @endif value="publish">Aktif</option>
                         <option @if($quiz->status==='passive') selected @endif value="passive">Pasif</option>
                         <option @if($quiz->status==='draft') selected @endif value="draft">Taslak</option>
                     </select>

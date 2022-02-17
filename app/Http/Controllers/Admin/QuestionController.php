@@ -20,9 +20,10 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($id)
-    {
-        $quiz = Quiz::whereId($id)->with('questions')->first() ?? abort (404,'Quiz Bulunamadı');
-        return view('admin.question.list',compact('quiz'));
+    {  
+        $quiz = Quiz::whereId($id)->with('questions')->first() ?? abort (404,'Quiz Bulunamadı');  
+        $questions = $quiz->questions()->paginate(5);    
+        return view('admin.question.list',compact('quiz','questions'));
     }
 
     /**

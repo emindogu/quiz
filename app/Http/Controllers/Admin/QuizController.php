@@ -14,7 +14,17 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $quizzes=Quiz::withCount('questions')->Paginate(5);
+        $quizzes = Quiz::withCount('questions');
+
+        if(request()->get('title')){
+            $quizzes = $quizzes->where('title', 'LIKE', "%".request()->get('title')."%");
+        }
+
+        if (request()->get('status')) {
+            $quizzes = $quizzes->where('status', 'LIKE', "%".request()->get('status')."%");
+        }
+
+        $quizzes = $quizzes->paginate(5);
         return view('admin.quiz.list', compact('quizzes'));
     }
 
