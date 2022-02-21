@@ -961,8 +961,17 @@ select{
 .-mt-px{
   margin-top: -1px;
 }
+.mb-1{
+  margin-bottom: 0.25rem;
+}
 .mb-8{
   margin-bottom: 2rem;
+}
+.mb-2{
+  margin-bottom: 0.5rem;
+}
+.mb-12{
+  margin-bottom: 3rem;
 }
 .block{
   display: block;

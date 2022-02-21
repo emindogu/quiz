@@ -32,7 +32,7 @@
                     @endif
                 </div>
             </form>
-            <table class="table table-bordered mt-4">
+            <table class="table table-bordered table-striped mt-4">
                 <thead>
                     <tr>
                         <th scope="col">Quiz</th>

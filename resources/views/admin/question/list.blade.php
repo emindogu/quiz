@@ -1,21 +1,32 @@
 <x-app-layout>
 
     <x-slot name="header">
-        {{$quiz->title}} Quizine Ait Sorular
+        <span style="color: firebrick">{{$quiz->title}}</span> Quizine Ait Sorular
     </x-slot>
 
     <div class="card">
         <div class="card-body">
             <h5 class="card-title float-left">
-                <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>
+                <a href="{{route('quizzes.index')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
                     Quizlere Dön
                 </a>
             </h5>
+
             <h5 class="card-title float-right">
-                <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-sm btn-primary"><i
-                        class="fa fa-plus"></i> Soru Oluştur</a>
+                <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                    Soru Oluştur</a>
             </h5>
-            <table class="table table-bordered">
+
+            <div class="row">
+                <form action="" method="get">
+                    <div class="col-md-3">
+                        <input type="text" name="ara" style="margin: 0 50%;"
+                            value="{{request()->get('ara')}}" placeholder="Soru Ara" class="form-control">
+                    </div>
+                </form>
+            </div>
+
+            <table class="table table-bordered table-striped mt-3">
                 <thead>
                     <tr>
                         <th scope="col">Soru</th>
@@ -53,15 +64,24 @@
                     @endforeach
                 </tbody>
             </table>
-             {!! $questions->render() !!}
 
-           @if($quiz->questions->count()<5)
-            <div class="alert alert-warning">
+            <!-- arama sonucunu görmek içi deneme yeri -->
+            <ul>
+                @if($data!=null)
+                @foreach($data as $d)
+                <li>{{$d->question}}</li>
+                @endforeach
+                @endif
+            </ul>
+
+            {!! $questions->render() !!}
+
+            @if($quiz->questions->count()<5) <div class="alert alert-warning">
                 Soru Sayısı 5'den Azsa Quiz Aktif Edilemez!
-            </div>
-           @endif
-
         </div>
+        @endif
+
+    </div>
     </div>
 
 </x-app-layout>

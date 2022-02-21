@@ -20,10 +20,25 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($id)
-    {  
-        $quiz = Quiz::whereId($id)->with('questions')->first() ?? abort (404,'Quiz Bulunamadı');  
-        $questions = $quiz->questions()->paginate(5);    
-        return view('admin.question.list',compact('quiz','questions'));
+    {
+        $quiz = Quiz::whereId($id)->with('questions')->first() ?? abort(404, 'Quiz Bulunamadı');
+
+        if (request()->get('ara')) {         
+        //    $quiz = Quiz::whereId($id)->with('questions')->where('questions.question', 'LIKE', '%' . request()->get('question') . '%')->get();
+        //    $quiz=Quiz::whereId($id)->with(['question' => function ($join) {
+        //        $join->where('question', 'LIKE', '%' . request()->get('question') . '%')->get();
+        //    }]);
+        $data= Quiz::where('quizzes.id',$id)->join('questions','questions.quiz_id','=', 'quizzes.id')->where('questions.question', 'LIKE', '%' . request()->get('ara') . '%')
+                    ->get(['questions.question', 'questions.image', 'questions.answer1', 'questions.answer2', 'questions.answer3', 'questions.answer4', 'questions.correct_answer']);
+            //$data=$data->paginate(5);
+            //return dd($questions);
+        }
+        else {
+            $data=null;
+        }
+
+        $questions = $quiz->questions()->paginate(5);
+        return view('admin.question.list',compact('quiz','questions','data')); 
     }
 
     /**
