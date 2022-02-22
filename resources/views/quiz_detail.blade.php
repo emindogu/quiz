@@ -30,8 +30,11 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-8">{{$quiz->description}}
-                        <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary">Quiz'e Katıl</a>
+                    <div class="col-md-8">
+                        {{$quiz->description}}
+                        <div>
+                            <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary">Quiz'e Katıl</a>
+                        </div>
                     </div>
                 </div>
             </p>
