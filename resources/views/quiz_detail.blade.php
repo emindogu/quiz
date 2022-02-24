@@ -44,6 +44,27 @@
                             </li>
                             @endif
                         </ul>
+
+                        @if (count($quiz->topTen)>0)
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <p class="card-title" style="font-size: 16px"><strong>Top 10</strong>
+                                    <ul class="list-group">
+                                        @foreach ($quiz->topTen as $row)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>{{$loop->iteration}})</strong>
+                                            <img class="w-8 h-8 rounded-full" src="{{$row->user->profile_photo_url}}">
+                                            {{$row->user->name}}
+                                            <span class="badge bg-dark bg-pill">{{$row->point}}</span>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>    
+                        @endif
+                        
+
                     </div>
                     <div class="col-md-8" style="position: relative">
                         <div style="position: absolute; top: 0;">
