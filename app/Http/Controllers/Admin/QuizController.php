@@ -55,7 +55,9 @@ class QuizController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        return $id;
+        $quiz = Quiz::with('results.user', 'topTen.user')->withCount('questions')->find($id) ?? abort(404, 'Quiz Bulunamadı');
+
+        return view('admin.quiz.show', compact('quiz'));
     }
 
     /**
@@ -93,9 +95,5 @@ class QuizController extends Controller {
         $quiz = Quiz::find($id) ?? abort(404, 'Quiz Bulunamadı');
         $quiz->delete();
         return redirect()->route('quizzes.index')->withSuccess('Quiz Başarıyla Silindi!');
-    }
-
-    public function deneme(){
-        return "emin";
     }
 }

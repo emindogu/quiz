@@ -6,28 +6,14 @@
     <div class="card">
         <div class="card-body">
             <p class="card-text">
+                <h5 class="card-title">
+                    <a href="{{route('quizzes.index')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>
+                        Quizlere Dön
+                    </a>
+                </h5>
                 <div class="row">
                     <div class="col-md-4">
                         <ul class="list-group">
-                            @if ($quiz->my_rank)
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Sıralama
-                                <span class="badge bg-dark bg-pill" style="font-weight:bold">{{$quiz->my_rank}}</span>
-                            </li>
-                            @endif
-                            @if($quiz->my_result)
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Puan
-                                <span class="badge bg-success bg-pill">{{$quiz->my_result->point}}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Doğru / Yanlış Sayıları
-                                <div class="float-rigt">
-                                    <span class="badge bg-warning bg-pill">{{$quiz->my_result->correct}} Doğru</span>
-                                    <span class="badge bg-danger bg-pill">{{$quiz->my_result->wrong}} Yanlış</span>
-                                </div>
-                            </li>
-                            @endif
                             @if($quiz->finished_at)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Son Katılım Tarihi
@@ -60,8 +46,7 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <strong>{{$loop->iteration}})</strong>
                                             <img class="w-8 h-8 rounded-full" src="{{$row->user->profile_photo_url}}">
-                                            <span @if (auth()->user()->id==$row->user_id) class="text-danger"
-                                                @endif>{{$row->user->name}}</span>
+                                            <span>{{$row->user->name}}</span>
                                             <span class="badge bg-dark bg-pill">{{$row->point}}</span>
                                         </li>
                                         @endforeach
@@ -70,18 +55,32 @@
                             </div>
                         </div>
                         @endif
-
                     </div>
-                    <div class="col-md-8" style="position: relative">
-                        <div style="position: absolute; top: 0;">
+                    <div class="col-md-8">
+                        <div>
                             {{$quiz->description}}
-                        </div>
-                        <div style="position: absolute; bottom: 0;">
-                            @if($quiz->my_result)
-                            <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-warning">Quiz'i Görüntüle</a>
-                            @elseif($quiz->finished_at > now() || $quiz->finished_at==null)
-                            <a href="{{route('quiz.join',$quiz->slug)}}" class="btn btn-primary">Quiz'e Katıl</a>
-                            @endif
+
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ad Soyad</th>
+                                        <th scope="col">Puan</th>
+                                        <th scope="col">Doğru</th>
+                                        <th scope="col">Yanlış</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($quiz->results as $row)
+                                    <tr>
+                                        <td>{{$row->user->name}}</td>
+                                        <td>{{$row->point}}</td>
+                                        <td>{{$row->correct}}</td>
+                                        <td>{{$row->wrong}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>

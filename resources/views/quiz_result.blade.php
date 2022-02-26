@@ -1,18 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        {{$quiz->title}} Sonucu
+        {{$quiz->title}} Quiz Sonucu
     </x-slot>
 
     <div class="card">
         <div class="card-body">
 
+            <h5 class="alert alert-success">Puan: <strong>{{$quiz->my_result->point}}</strong></h5>
+
             @foreach ($quiz->questions as $question)
+
             @if ($question->correct_answer==$question->my_answer->answer)
             <i class="fa fa-check text-success"></i>
             @else
             <i class="fa fa-times text-danger"></i>
             @endif
-            <strong>{{$loop->iteration}})</strong> {{$question->question}}
+
+            <strong>{{$loop->iteration}})</strong> {{$question->question}} <span class="badge bg-success bg-pill">Doğru
+                Yanıtlama %{{$question->true_percent}}</span>
 
             @if ($question->image)
             <img src="{{asset($question->image)}}" style="width:200px" alt="" class="img-responsive">

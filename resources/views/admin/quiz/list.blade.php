@@ -61,9 +61,12 @@
                             @endswitch
                         </td>
                         <td>
-                            <span title="{{$quiz->finished_at}}">{{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}}</span>
+                            <span
+                                title="{{$quiz->finished_at}}">{{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}}</span>
                         </td>
                         <td>
+                            <a href="{{route('quizzes.details',$quiz->id)}}" class="btn btn-sm btn-secondary"><i
+                                    class="fa fa-info-circle" title="Quiz Bilgisi"></i></a>
                             <a href="{{route('questions.index',$quiz->id)}}" class="btn btn-sm btn-warning"><i
                                     class="fa fa-question" title="Quiz Sorularını Göster"></i></a>
                             <a href="{{route('quizzes.edit',$quiz->id)}}" class="btn btn-sm btn-primary"><i
